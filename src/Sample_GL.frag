@@ -1,10 +1,10 @@
 #version 330 core
 
 // Interpolated values from the vertex shaders
-in vec3 fragColor;
+in vec4 fragColor;
 
 // output data
-out vec3 color;
+out vec4 color;
 
 void main()
 {

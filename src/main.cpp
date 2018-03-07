@@ -10,7 +10,7 @@
 #include "wind.h"
 #include "patches.h"
 #include "gift.h"
-
+#include "ocean.h"
 using namespace std;
 
 GLMatrices Matrices;
@@ -28,6 +28,7 @@ Monster monster[51];
 Gift gifts[51];
 Gift barrel_gift[10];
 Pool pool;
+Ocean ocean;
 Aim aim;
 Sail sail;
 Wind wind;
@@ -102,7 +103,6 @@ void draw() {
     glm::mat4 MVP;  // MVP = Projection * View * Model
 
     // Scene render
-    pool.draw(VP);
     if (windTimer > 0) wind.draw(VP);
     for(int i = 0 ; i < rockCount ; i++){
         rocks[i].draw(VP);
@@ -134,6 +134,9 @@ void draw() {
             flag = 0;
         }
     }
+    //ocean.draw(VP);
+pool.draw(VP);
+    
 }
 
 void tick_input(GLFWwindow *window) {
@@ -418,12 +421,12 @@ void tick_elements() {
 void initGL(GLFWwindow *window, int width, int height) {
     /* Objects should be created before any other gl function and shaders */
     // Create the models
-
+    ocean = Ocean(0,0,-7,COLOR_BLUE);
     boat = Boat(0, 0, COLOR_RED);
     boat.position.z += level;
     wind = Wind(0,0);
     pool = Pool(0,0, COLOR_BLUE);
-    pool.position.z -= 32767;
+    pool.position.z -= 32765;
     aim = Aim(0, 0, COLOR_RED);
     aim.position.z += level;
     cannon = Rock(boat.position.x,boat.position.y,COLOR_RED);
@@ -484,7 +487,7 @@ void initGL(GLFWwindow *window, int width, int height) {
     programID = LoadShaders("Sample_GL.vert", "Sample_GL.frag");
     // Get a handle for our "MVP" uniform
     Matrices.MatrixID = glGetUniformLocation(programID, "MVP");
-    // Matrices.Transparency = glGetUniformLocation(programID, "trans");
+    Matrices.Transparency = glGetUniformLocation(programID, "trans");
 
 
     reshapeWindow (window, width, height);
@@ -518,7 +521,7 @@ int main(int argc, char **argv) {
     /* Draw in loop */
     while (!glfwWindowShouldClose(window)) {
         // Process timers
-         audio_play();
+        // audio_play();
         if (t60.processTick()) {
             windCounter--;
             windTimer --;

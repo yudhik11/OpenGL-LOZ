@@ -64,7 +64,7 @@ struct GLMatrices {
     glm::mat4 model;
     glm::mat4 view;
     GLuint    MatrixID;
-    // GLuint    Transparency;
+     GLuint    Transparency;
 };
 
 extern GLMatrices Matrices;
