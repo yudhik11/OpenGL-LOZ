@@ -12,9 +12,9 @@ Aim::Aim(float x, float y, color_t color) {
     static const GLfloat vertex_buffer_data[] = {
         1.0f, 0.0f,  0.0f, 
         -1.0f, 0.0f, 0.0f, 
-        1.0f, 10.0f, 0.0f, 
-        1.0f, 10.0f, 0.0f, 
-        -1.0f, 10.0f, 0.0f, 
+        1.0f, 6.0f, 0.0f,
+        1.0f, 6.0f, 0.0f,
+        -1.0f, 6.0f, 0.0f,
         -1.0f, 0.0f, 0.0f, 
     };
 

@@ -1,13 +1,13 @@
 #include "main.h"
 
-#ifndef ROCK_H
-#define ROCK_H
+#ifndef GIFT_H
+#define GIFT_H
 
 
-class Rock {
+class Gift {
 public:
-    Rock() {}
-    Rock(float x, float y, color_t color);
+    Gift() {}
+    Gift(float x, float y, color_t color);
     glm::vec3 position;
     float rotation;
     float size;
@@ -24,4 +24,4 @@ private:
     VAO *object;
 };
 
-#endif // BALL_H
+#endif // GIFT_H

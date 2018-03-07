@@ -5,7 +5,7 @@ layout (location = 0) in vec3 vertexPosition;
 layout (location = 1) in vec3 vertexColor;
 
 uniform mat4 MVP;
-
+// uniform float trans;
 // output data : used by fragment shader
 out vec3 fragColor;
 
@@ -15,6 +15,7 @@ void main ()
 
     // The color of each vertex will be interpolated
     // to produce the color of each fragment
+    // fragColor = vec4(vertexColor,trans);
     fragColor = vertexColor;
 
     // Output position of the vertex, in clip space : MVP * position

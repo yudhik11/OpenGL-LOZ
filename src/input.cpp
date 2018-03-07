@@ -75,7 +75,7 @@ void scroll_callback(GLFWwindow *window, double xoffset, double yoffset) {
 }
 
 void cursor_position_callback(GLFWwindow* window, double xpos, double ypos) {
-    printf("xpos=%f ypos=%f\n",xpos, ypos);
+    //printf("xpos=%f ypos=%f\n",xpos, ypos);
     heli_camera(xpos, ypos);
     cannon_pos(xpos , ypos);
 }

@@ -57,8 +57,12 @@ void Pool::draw(glm::mat4 VP) {
     // rotate          = rotate * glm::translate(glm::vec3(0, -0.6, 0));
     Matrices.model *= (translate * rotate);
     glm::mat4 MVP = VP * Matrices.model;
+    // glEnable(GL_BLEND);
+    // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glUniformMatrix4fv(Matrices.MatrixID, 1, GL_FALSE, &MVP[0][0]);
+    // glUniform1f(Matrices.Transparency, 0.5);
     draw3DObject(this->object);
+    // glDisable(GL_BLEND);
 }
 
 void Pool::set_position(float x, float y) {

@@ -15,11 +15,16 @@
 #include <glm/gtc/matrix_transform.hpp>
 void heli_camera(float x, float y);
 void cannon_pos(float x, float y);
-
 struct color_t {
     int r;
     int g;
     int b;
+};
+struct color_a {
+    int r;
+    int g;
+    int b;
+    int alpha;
 };
 
 // nonedit.cpp
@@ -59,6 +64,7 @@ struct GLMatrices {
     glm::mat4 model;
     glm::mat4 view;
     GLuint    MatrixID;
+    // GLuint    Transparency;
 };
 
 extern GLMatrices Matrices;
@@ -70,6 +76,8 @@ enum direction_t { DIR_UP, DIR_RIGHT, DIR_DOWN, DIR_LEFT };
 struct bounding_box_t {
     float x;
     float y;
+    float z;
+    float length;
     float width;
     float height;
 };
@@ -85,6 +93,8 @@ extern const color_t COLOR_GREEN;
 extern const color_t COLOR_BLACK;
 extern const color_t COLOR_BACKGROUND;
 extern const color_t COLOR_BLUE;
+extern const color_t COLOR_DBLUE;
+// extern const color_a COLOR_ABLUE;
 extern const color_t COLOR_CUBE1;
 extern const color_t COLOR_CUBE2;
 extern const color_t COLOR_CUBE3;
@@ -95,5 +105,11 @@ extern const color_t COLOR_CUBE7;
 extern const color_t COLOR_CUBE8;
 extern const color_t COLOR_CUBE9;
 extern const color_t COLOR_BLAST;
+extern const color_t COLOR_BROWN;
+extern const color_t COLOR_SMOKE;
 
+//Audio
+void audio_init();
+void audio_play();
+void audio_close();
 #endif
