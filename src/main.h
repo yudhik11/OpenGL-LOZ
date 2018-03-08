@@ -5,7 +5,6 @@
 #include <cmath>
 #include <fstream>
 #include <vector>
-
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
@@ -15,6 +14,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 void heli_camera(float x, float y);
 void cannon_pos(float x, float y);
+
 struct color_t {
     int r;
     int g;
@@ -33,6 +33,8 @@ GLuint     LoadShaders(const char *vertex_file_path, const char *fragment_file_p
 struct VAO *create3DObject(GLenum primitive_mode, int numVertices, const GLfloat *vertex_buffer_data, const GLfloat *color_buffer_data, GLenum fill_mode = GL_FILL);
 struct VAO *create3DObject(GLenum primitive_mode, int numVertices, const GLfloat *vertex_buffer_data, const GLfloat red, const GLfloat green, const GLfloat blue, GLenum fill_mode = GL_FILL);
 struct VAO *create3DObject(GLenum primitive_mode, int numVertices, const GLfloat *vertex_buffer_data, const color_t color, GLenum fill_mode = GL_FILL);
+struct VAO *create3DObject(GLenum primitive_mode, int numVertices, const GLfloat *vertex_buffer_data, const color_t *color, GLenum fill_mode, int tot);
+
 void       draw3DObject(struct VAO *vao);
 
 // input.cpp
@@ -89,6 +91,7 @@ void reset_screen();
 
 // ---- Colors ----
 extern const color_t COLOR_RED;
+extern const color_t COLOR_DRED;
 extern const color_t COLOR_GREEN;
 extern const color_t COLOR_BLACK;
 extern const color_t COLOR_BACKGROUND;
@@ -107,9 +110,18 @@ extern const color_t COLOR_CUBE9;
 extern const color_t COLOR_BLAST;
 extern const color_t COLOR_BROWN;
 extern const color_t COLOR_SMOKE;
+extern const color_t COLOR_GIFT;
+extern const color_t COLOR_CANNON;
+extern const color_t COLOR_BROWN;
+extern const color_t COLOR_YELLOW;
+extern const color_t COLOR_BBLUE;
+extern const color_t COLOR_VIOLET;
+extern const color_t COLOR_INDIGO;
+extern const color_t COLOR_ORANGE;
 
 //Audio
 void audio_init();
 void audio_play();
 void audio_close();
+
 #endif

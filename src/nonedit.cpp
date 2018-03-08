@@ -197,6 +197,19 @@ struct VAO *create3DObject(GLenum primitive_mode, int numVertices, const GLfloat
 
     return create3DObject(primitive_mode, numVertices, vertex_buffer_data, color_buffer_data, fill_mode);
 }
+struct VAO *create3DObject(GLenum primitive_mode, int numVertices, const GLfloat *vertex_buffer_data, const color_t *color, GLenum fill_mode, int tot) {
+    GLfloat *color_buffer_data = new GLfloat[3 * numVertices];
+    int k=0;
+    double count=1.0,l=(double)numVertices/(double)tot;
+    for (int i = 0; i < numVertices; i++) {
+        color_buffer_data[3 * i]     = color[k].r / 256.0;
+        color_buffer_data[3 * i + 1] = color[k].g / 256.0;
+        color_buffer_data[3 * i + 2] = color[k].b / 256.0;
+        count++;
+        if(count > l) count = 1.0, k++;
+    }
+    return create3DObject(primitive_mode, numVertices, vertex_buffer_data, color_buffer_data, fill_mode);
+}
 
 struct VAO *create3DObject(GLenum primitive_mode, int numVertices, const GLfloat *vertex_buffer_data, const color_t color, GLenum fill_mode) {
     return create3DObject(primitive_mode, numVertices, vertex_buffer_data, color.r / 256.0, color.g / 256.0, color.b / 256.0, fill_mode);

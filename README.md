@@ -1,29 +1,43 @@
 Assignment 2
 CSE251 - Graphics, Spring 2018
 
-Yudhik Agrawal 20161093
+Yudhik Agrawal (20161093)
+
 
 Controls:
-
-• left , right , up , down arrow keys for movement of boat.
-• space bar to jump.
-• c to change camera view.
-• mouse cursor to make angle to shoot.
-• f to shoot.
-
+Boat Movement ::
+	-> left : turn left
+	-> right : turn right
+	-> up : move straight
+	-> down : move back
+	-> space bar : jump.
+Views ::
+	-> 1 : follow-cam view
+	-> 2 : boat-view
+	-> 3 : top-view
+	-> 4 : tower-view
+	-> 5 : helicopter-view
+		-> Change position of cursor to view the world
+Cannon ::
+	-> Mouse cursor movement to move the cannon
+	-> F : Throw fireball
 
 
 Available Views:
 
-• Boat view: This is a view from the ship’s position where only a part of the world in front is
+-> Boat view: This is a view from the ship’s position where only a part of the world in front is
 visible. In other words, in this view, we see what the ship sees, as if we were the ship.
-• Top View: This is a top-down view, as if we were looking vertically downwards from a position
+
+-> Top View: This is a top-down view, as if we were looking vertically downwards from a position
 in the sky. This gives a clear picture of the path.
-• Tower view: Here, the camera is sitting on a tower, to the side of the plane of playing,
+
+-> Tower view: Here, the camera is sitting on a tower, to the side of the plane of playing,
 observing it at an angle.
-• Follow-cam view: This is a view of the ship and the region in front of it from a location behind
+
+-> Follow-cam view: This is a view of the ship and the region in front of it from a location behind
 and above it, as if the camera is following the ship.
-• Helicopter-cam view: Here, the camera is movable with the mouse in an intuitive manner.
+
+-> Helicopter-cam view: Here, the camera is movable with the mouse in an intuitive manner.
 Clicking and dragging should change the look angle, the up vector should remain up always,and the scroll wheel will move the camera closer or farther away from the scene.up vector
 should remain up always, and the scroll wheel will move the camera closer or farther away from
 the scene.

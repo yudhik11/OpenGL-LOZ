@@ -22,6 +22,7 @@ public:
     int visible;
 private:
     VAO *object;
+    VAO *object1;
 };
 
 #endif // GIFT_H

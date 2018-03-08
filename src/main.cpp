@@ -1,7 +1,6 @@
 #include "main.h"
 #include "timer.h"
 #include "boat.h"
-#include "pool.h"
 #include "rock.h"
 #include "aim.h"
 #include "monster.h"
@@ -11,6 +10,9 @@
 #include "patches.h"
 #include "gift.h"
 #include "ocean.h"
+#include "giftbarrel.h"
+#include "pool.h"
+
 using namespace std;
 
 GLMatrices Matrices;
@@ -21,12 +23,11 @@ GLFWwindow *window;
 * Customizable functions *
 **************************/
 
-Boat boat;
 Rock rocks[100];
 Rock cannon,blast;
 Monster monster[51];
 Gift gifts[51];
-Gift barrel_gift[10];
+Giftbarrel barrel_gift[10];
 Pool pool;
 Ocean ocean;
 Aim aim;
@@ -34,7 +35,7 @@ Sail sail;
 Wind wind;
 Barrel barrel[10];
 Patches patches[100];
-
+Boat boat;
 bool projectType = 0;
 
 float screen_zoom = 1, screen_center_x = 0, screen_center_y = 0 , gravity = 0.5 ,level = 3,pi=3.141;
@@ -134,9 +135,8 @@ void draw() {
             flag = 0;
         }
     }
-    //ocean.draw(VP);
+    ocean.draw(VP);
 pool.draw(VP);
-    
 }
 
 void tick_input(GLFWwindow *window) {
@@ -247,13 +247,21 @@ void tick_input(GLFWwindow *window) {
 void tick_elements() {
     if (health <= 0) exit(0);
     boat.tick();
+    for (int i = 1;i< logCount ;i++){
+        if (barrel_gift[i].visible) barrel_gift[i].tick();
+    }
     boat.shm();
+    pool.shm();
     sail.position = boat.position;
     if (windAngle){
         boat.position.x += (rand()%2 + 1) * cos(windAngle*M_PI/180.0f) / 5.0f ;
-        boat.position.y += (rand()%2 + 1) * sin(windAngle*M_PI/180.0f) / 5.0f ;
-        cannon.position.x = boat.position.x;
+        boat.position.y += (rand()%2 + 1) * cos(windAngle*M_PI/180.0f) / 5.0f ;
+        cannon.position.x += (rand()%2 + 1) * cos(windAngle*M_PI/180.0f) / 5.0f;
         cannon.position.y = boat.position.y;
+        if (cannon.position.z == level) {
+            cannon.position.x = boat.position.x;
+            cannon.position.y = boat.position.y;
+        }
         aim.position.x = boat.position.x;
         aim.position.y = boat.position.y;
         int rck = 0;
@@ -357,8 +365,9 @@ void tick_elements() {
          !detect_collision(boat.bounding_box(), barrel[i].bounding_box())){
              barrel[i].visible = 0;
             barrel_gift[i].visible = 1;
-            barrel_gift[i].position = barrel[i].position ;
-            barrel_gift[i].position.z +=5;
+            barrel_gift[i].position.x = barrel[i].position.x ;
+            barrel_gift[i].position.y = barrel[i].position.y ;
+            barrel_gift[i].position.z = 15;
          }
     }
     for (int i=0;i<logCount ; i++){
@@ -411,7 +420,7 @@ void tick_elements() {
         cannon.position.y = boat.position.y;
     }
     speed_camera();
-    sprintf(title_bar,"LOZ -- HEALTH: [%d] \t KILLED: [%d]\t AWESOME_LIFE: [%d]\t COINS: [%d windAngle: %f %d",(int)health, total_monster, gifttimer,coins,windAngle,windCounter);
+    sprintf(title_bar,"LOZ(BO$$) - HEALTH: [%d]\tKILLED: [%d]\tAWESOME_LIFE: [%d]\tCOINS: [%d]",(int)health, total_monster, gifttimer,coins);
     glfwSetWindowTitle(window,title_bar);
     time_cnt ++;
 }
@@ -426,10 +435,10 @@ void initGL(GLFWwindow *window, int width, int height) {
     boat.position.z += level;
     wind = Wind(0,0);
     pool = Pool(0,0, COLOR_BLUE);
-    pool.position.z -= 32765;
+    pool.position.z -= 12343;
     aim = Aim(0, 0, COLOR_RED);
     aim.position.z += level;
-    cannon = Rock(boat.position.x,boat.position.y,COLOR_RED);
+    cannon = Rock(boat.position.x,boat.position.y,COLOR_CANNON);
     cannon.position.z += level;
     blast = Rock(-1,-1,COLOR_BLAST);
     blast.size = 15;
@@ -456,6 +465,10 @@ void initGL(GLFWwindow *window, int width, int height) {
             monster[50].size = 30;
             monster[i].life = 3;
             monster[50].visible = 0;
+            gifts[i] = Gift(x , y, COLOR_GIFT);
+            gifts[i].position = monster[i].position;
+            gifts[i].visible = 0;
+            gifts[i].size = 15;
         }
         else{
             if (i%2){
@@ -470,17 +483,18 @@ void initGL(GLFWwindow *window, int width, int height) {
                 monster[i].position.z += 1;
                 monster[i].size = (i%5 + 3)* 3;
             }
+                gifts[i] = Gift(x , y, COLOR_RED);
+                gifts[i].position = monster[i].position;
+                gifts[i].visible = 0;
+                gifts[i].size = rand()%5 + 4;
+
         }
-        gifts[i] = Gift(x , y, COLOR_RED);
-        gifts[i].position = monster[i].position;
-        gifts[i].visible = 0;
-        gifts[i].size = rand()%5 + 7;
     }
     for (int i=0;i<logCount;i++){
         barrel[i] = Barrel(rand()%500, rand()%500, 3, 10 , COLOR_BROWN);
-        barrel_gift[i] = Gift(0,0,COLOR_RED);
-        barrel_gift[i].position = barrel[i].position ;
-        barrel_gift[i].size = 3;
+        barrel_gift[i] = Giftbarrel(0,0,0);
+        barrel_gift[i].position.x = barrel[i].position.x ;
+        barrel_gift[i].position.y = barrel[i].position.y ;
         barrel_gift[i].visible = 0;
     }
     // Create and compile our GLSL program from the shaders

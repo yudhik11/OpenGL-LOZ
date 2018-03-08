@@ -23,6 +23,7 @@ public:
     int visible;
 private:
     VAO *object;
+    VAO *object1;
 };
 
 #endif // BALL_H

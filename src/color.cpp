@@ -1,9 +1,7 @@
 #include "main.h"
 
-const color_t COLOR_RED = { 236, 100, 75 };
-const color_t COLOR_GREEN = { 135, 211, 124 };
 const color_t COLOR_BLACK = { 52, 73, 94 };
-const color_t COLOR_BACKGROUND = { 242, 241, 239 };
+const color_t COLOR_BACKGROUND = { 153, 235, 255 };
 const color_t COLOR_BLUE = { 0, 138, 230 };
 // const color_a COLOR_ABLUE = { 0, 138, 230, 0.3 };
 const color_t COLOR_CUBE1 = { 128, 43, 0 };
@@ -17,5 +15,15 @@ const color_t COLOR_CUBE8 = { 51, 153, 102 };
 const color_t COLOR_CUBE9 = { 135, 211, 124 };
 const color_t COLOR_BLAST = { 230, 57, 0 };
 const color_t COLOR_BROWN = { 165, 42, 42 };
-const color_t COLOR_SMOKE = { 245, 245, 245 };
+const color_t COLOR_SMOKE = { 102, 102, 153 };
 const color_t COLOR_DBLUE = { 0, 0, 230 };
+const color_t COLOR_GIFT = { 128, 255, 255 };
+const color_t COLOR_CANNON = { 102, 0, 51};
+const color_t COLOR_VIOLET = { 202,0,202};
+const color_t COLOR_INDIGO = { 75,0,130};
+const color_t COLOR_BBLUE = { 0,191,255};
+const color_t COLOR_GREEN = { 135, 211, 124 };
+const color_t COLOR_YELLOW = { 255,255,0};
+const color_t COLOR_ORANGE = { 255,165,0};
+const color_t COLOR_RED = { 255, 128, 128};
+const color_t COLOR_DRED = { 255, 0 , 0};
