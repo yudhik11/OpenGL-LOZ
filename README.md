@@ -60,3 +60,12 @@ up.
 There would be rocks present in the sea and if you do not maneuver around them, you will lose
 health points. At random times, a strong wind would start blowing in any particular direction.
 Your boat must change its speed according to the direction of the wind.
+
+BONUS::
+== Transparency
+== Audio
+== Wind
+== Patches
+== multiple enemies
+== title bar
+== booster for invinciblity
