@@ -147,7 +147,21 @@ GLuint LoadShaders(const char *vertex_file_path, const char *fragment_file_path)
 }
 
 
+
+/* Generate VAO, VBOs and return VAO handle - Common Color for all vertices */
+struct VAO *create3DObject(GLenum primitive_mode, int numVertices, const GLfloat *vertex_buffer_data, const GLfloat red, const GLfloat green, const GLfloat blue, GLenum fill_mode) {
+    GLfloat *color_buffer_data = new GLfloat[3 * numVertices];
+    for (int i = 0; i < numVertices; i++) {
+        color_buffer_data[3 * i]     = red;
+        color_buffer_data[3 * i + 1] = green;
+        color_buffer_data[3 * i + 2] = blue;
+    }
+
+    return create3DObject(primitive_mode, numVertices, vertex_buffer_data, color_buffer_data, fill_mode);
+}
+
 /* Generate VAO, VBOs and return VAO handle */
+
 struct VAO *create3DObject(GLenum primitive_mode, int numVertices, const GLfloat *vertex_buffer_data, const GLfloat *color_buffer_data, GLenum fill_mode) {
     struct VAO *vao = new struct VAO;
     vao->PrimitiveMode = primitive_mode;
@@ -184,18 +198,6 @@ struct VAO *create3DObject(GLenum primitive_mode, int numVertices, const GLfloat
     );
 
     return vao;
-}
-
-/* Generate VAO, VBOs and return VAO handle - Common Color for all vertices */
-struct VAO *create3DObject(GLenum primitive_mode, int numVertices, const GLfloat *vertex_buffer_data, const GLfloat red, const GLfloat green, const GLfloat blue, GLenum fill_mode) {
-    GLfloat *color_buffer_data = new GLfloat[3 * numVertices];
-    for (int i = 0; i < numVertices; i++) {
-        color_buffer_data[3 * i]     = red;
-        color_buffer_data[3 * i + 1] = green;
-        color_buffer_data[3 * i + 2] = blue;
-    }
-
-    return create3DObject(primitive_mode, numVertices, vertex_buffer_data, color_buffer_data, fill_mode);
 }
 struct VAO *create3DObject(GLenum primitive_mode, int numVertices, const GLfloat *vertex_buffer_data, const color_t *color, GLenum fill_mode, int tot) {
     GLfloat *color_buffer_data = new GLfloat[3 * numVertices];

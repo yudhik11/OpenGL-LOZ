@@ -251,7 +251,7 @@ void tick_elements() {
         if (barrel_gift[i].visible) barrel_gift[i].tick();
     }
     boat.shm();
-    pool.shm();
+//    pool.shm();
     sail.position = boat.position;
     if (windAngle){
         boat.position.x += (rand()%2 + 1) * cos(windAngle*M_PI/180.0f) / 5.0f ;

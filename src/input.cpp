@@ -49,6 +49,18 @@ void keyboardChar(GLFWwindow *window, unsigned int key) {
     }
 }
 
+
+
+void scroll_callback(GLFWwindow *window, double xoffset, double yoffset) {
+    // Do something
+}
+
+void cursor_position_callback(GLFWwindow* window, double xpos, double ypos) {
+    //printf("xpos=%f ypos=%f\n",xpos, ypos);
+    heli_camera(xpos, ypos);
+    cannon_pos(xpos , ypos);
+}
+
 /* Executed when a mouse button is pressed/released */
 void mouseButton(GLFWwindow *window, int button, int action, int mods) {
     switch (button) {
@@ -68,14 +80,4 @@ void mouseButton(GLFWwindow *window, int button, int action, int mods) {
     default:
         break;
     }
-}
-
-void scroll_callback(GLFWwindow *window, double xoffset, double yoffset) {
-    // Do something
-}
-
-void cursor_position_callback(GLFWwindow* window, double xpos, double ypos) {
-    //printf("xpos=%f ypos=%f\n",xpos, ypos);
-    heli_camera(xpos, ypos);
-    cannon_pos(xpos , ypos);
 }
