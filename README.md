@@ -67,7 +67,6 @@ health points. At random times, a strong wind would start blowing in any particu
 Your boat must change its speed according to the direction of the wind.
 
 ##BONUS
-
 == Transparency
 == Audio
 == Wind
